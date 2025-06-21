@@ -1,0 +1,241 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column; /* Ubah ke column untuk tombol di bawah */
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
+    background-color: #FFD1DC; /* Pink blush */
+}
+ /* Add this new style just for the button container */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 30px;
+            width: 350px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Reset button positioning */
+        #prev-btn, #next-btn {
+            position: relative;
+            top: auto;
+            left: auto;
+            right: auto;
+            transform: none;
+            margin: 0;
+        }
+        
+        /* Main container to center everything */
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            justify-content: center;
+        }
+/* Book - Tidak ada perubahan */
+.book {
+    position: relative;
+    width: 350px;
+    height: 500px;
+    transition: transform 0.5s;
+    perspective: 2000px;
+    transition: transform 0.8s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+
+.page-image {
+   width: auto;
+    height: auto;
+    max-width: 100%;
+}
+
+
+.paper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    transform-style: preserve-3d;
+    transition: transform 1s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.front,
+.back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-origin: left center;
+    transition: transform 0.8s cubic-bezier(0.42, 0, 0.17, 0.99);
+}
+
+.front {
+    z-index: 1;
+}
+
+.back {
+    z-index: 0;
+}
+
+.front-content,
+.back-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.back-content {
+    transform: rotateY(180deg);
+}
+
+/* Efek flip original - TIDAK DIUBAH */
+.flipped .front {
+    transform: rotateY(-180deg);
+    z-index: 10;
+}
+
+.flipped .back {
+    transform: rotateY(-180deg);
+    z-index: 10;
+}
+
+
+
+
+/* Garis tepi vintage */
+.front::before {
+    content: "";
+    position: absolute;
+    right: 15px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent,
+        transparent 5px,
+        #f0e6d9 5px,
+        #f0e6d9 10px
+    );
+}
+
+
+
+
+/* Efek 3D saat hover */
+.book:hover .paper:not(.flipped) {
+    transform: translateZ(10px);
+}
+
+/* Tombol navigasi */
+        #prev-btn, #next-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: white; /* Warna putih */
+            color: #FF6B8B; /* Warna teks pink */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid #FFB6C1; /* Border pink muda */
+            box-shadow: 0 4px 8px rgba(255, 107, 139, 0.2);
+            margin: 0;
+            padding: 0;
+            font-size: 24px;
+            position: relative;
+        }
+
+        /* Ikon panah */
+        #prev-btn::before {
+            content: "←";
+        }
+
+        #next-btn::before {
+            content: "→";
+        }
+
+        /* Efek hover */
+        #prev-btn:hover, #next-btn:hover {
+            background-color: #FFE6EB; /* Pink sangat muda */
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(255, 107, 139, 0.3);
+            border-color: #FF6B8B; /* Border pink lebih gelap */
+        }
+
+/* Paper stack order - Tidak diubah */
+#p1 { z-index: 8; }
+#p2 { z-index: 7; }
+#p3 { z-index: 6; }
+#p4 { z-index: 5; }
+#p5 { z-index: 4; }
+#p6 { z-index: 3; }
+#p7 { z-index: 2; }
+#p8 { z-index: 1; }
+
+/* Responsive */
+@media (min-width: 360px) {
+ .book {
+    position: relative;
+    width: 200px;
+    height: 50px;
+    transition: transform 0.5s;
+    perspective: 2000px;
+    transition: transform 0.8s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+/* Tombol navigasi */
+        #prev-btn, #next-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: white; /* Warna putih */
+            color: #FF6B8B; /* Warna teks pink */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid #FFB6C1; /* Border pink muda */
+            box-shadow: 0 4px 8px rgba(255, 107, 139, 0.2);
+            font-size: 24px;
+        }
+
+        /* Ikon panah */
+        #prev-btn::before {
+            content: "←";
+        }
+
+        #next-btn::before {
+            content: "→";
+        }
+
+        /* Efek hover */
+        #prev-btn:hover, #next-btn:hover {
+            background-color: #FFE6EB; /* Pink sangat muda */
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(255, 107, 139, 0.3);
+            border-color: #FF6B8B; /* Border pink lebih gelap */
+        }
+                /* Reset button positioning */
+        #prev-btn, #next-btn {
+            position:static;
+            top: auto;
+            left: auto;
+            right: auto;
+            transform: none;
+            margin-top: 7rem;
+        }
+
+}
