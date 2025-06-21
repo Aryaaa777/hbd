@@ -9,9 +9,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
     <script src="./main.js" defer></script>
     <script src="https://kit.fontawesome.com/b0f29e9bfe.js" crossorigin="anonymous"></script>
-
 </head>
 <body>
+    <!-- Pemutar musik otomatis -->
+    <audio id="bgMusic" loop muted>
+        <source src="kasihaba.mp3" type="audio/mpeg">
+    </audio>
+    <div id="musicOverlay" style="position:fixed; top:0; left:0; width:100%; height:100%; background:transparent; z-index:9999; display:block;"></div>
+
     <div class="main-container">
         <!-- Book -->
         <div id="book" class="book">
