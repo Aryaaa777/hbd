@@ -11,8 +11,12 @@ body {
     justify-content: center;
     align-items: center;
     font-family: sans-serif;
-    background-color: #FFD1DC; /* Pink blush */
+    background: 
+        linear-gradient(rgba(255,209,220,0.7), rgba(255,209,220,0.7)),
+        url('background.png') center/cover;
+        background-blend-mode: multiply;
 }
+    
  /* Add this new style just for the button container */
         .button-container {
             display: flex;
@@ -129,9 +133,6 @@ body {
         #f0e6d9 10px
     );
 }
-
-
-
 
 /* Efek 3D saat hover */
 .book:hover .paper:not(.flipped) {
