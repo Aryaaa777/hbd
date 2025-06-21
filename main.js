@@ -2,6 +2,8 @@
 const prevBtn = document.querySelector("#prev-btn");
 const nextBtn = document.querySelector("#next-btn");
 const book = document.querySelector("#book");
+const bgMusic = document.getElementById('bgMusic');
+const musicOverlay = document.getElementById('musicOverlay');
 
 const paper1 = document.querySelector("#p1");
 const paper2 = document.querySelector("#p2");
@@ -20,6 +22,31 @@ nextBtn.addEventListener("click", goNextPage);
 let currentLocation = 1;
 let numOfPapers = 8; // Diubah dari 3 menjadi 8
 let maxLocation = numOfPapers + 1;
+
+// Solusi Chrome Autoplay Policy
+function enableAutoplay() {
+    bgMusic.muted = false;
+    const playPromise = bgMusic.play();
+    
+    if (playPromise !== undefined) {
+        playPromise.catch(() => {
+            // Fallback untuk browser yang memblok autoplay
+            musicOverlay.style.display = 'block';
+        });
+    }
+}
+
+// Trigger autoplay setelah interaksi pertama
+musicOverlay.addEventListener('click', () => {
+    bgMusic.play();
+    musicOverlay.style.display = 'none';
+});
+
+// Coba autoplay saat load
+window.addEventListener('load', () => {
+    bgMusic.volume = 0.3; // Volume rendah
+    enableAutoplay();
+});
 
 function openBook() {
     book.style.transform = "translateX(50%)";
