@@ -1,26 +1,30 @@
 // References to DOM Elements
-const prevBtn = document.querySelector("#prev-btn");
-const nextBtn = document.querySelector("#next-btn");
-const book = document.querySelector("#book");
+const prevBtn = document.getElementById("prev-btn");
+const nextBtn = document.getElementById("next-btn");
+const book = document.getElementById("book");
+const openBtn = document.getElementById("open-btn");
+const buttonContainer = document.querySelector('.button-container');
 const bgMusic = document.getElementById('bgMusic');
 const musicOverlay = document.getElementById('musicOverlay');
 
-const paper1 = document.querySelector("#p1");
-const paper2 = document.querySelector("#p2");
-const paper3 = document.querySelector("#p3");
-const paper4 = document.querySelector("#p4");
-const paper5 = document.querySelector("#p5");
-const paper6 = document.querySelector("#p6");
-const paper7 = document.querySelector("#p7");
-const paper8 = document.querySelector("#p8");
+// Paper elements
+const paper1 = document.getElementById("p1");
+const paper2 = document.getElementById("p2");
+const paper3 = document.getElementById("p3");
+const paper4 = document.getElementById("p4");
+const paper5 = document.getElementById("p5");
+const paper6 = document.getElementById("p6");
+const paper7 = document.getElementById("p7");
+const paper8 = document.getElementById("p8");
 
-// Event Listener
+// Event Listeners
 prevBtn.addEventListener("click", goPrevPage);
 nextBtn.addEventListener("click", goNextPage);
+openBtn.addEventListener("click", openFirstPage);
 
 // Business Logic
 let currentLocation = 1;
-let numOfPapers = 8; // Diubah dari 3 menjadi 8
+let numOfPapers = 8;
 let maxLocation = numOfPapers + 1;
 
 // Solusi Chrome Autoplay Policy
@@ -48,7 +52,24 @@ window.addEventListener('load', () => {
     enableAutoplay();
 });
 
+// Open Book Function
+function openFirstPage() {
+    buttonContainer.classList.add('show-buttons');
+    paper1.classList.add("flipped");
+    paper1.style.zIndex = 1;
+    currentLocation = 2;
+    
+    // Debugging
+    console.log("Tombol Open disembunyikan");
+    console.log("Tombol navigasi ditampilkan");
+    openBook();
+    paper1.classList.add("flipped");
+    paper1.style.zIndex = 1;
+    currentLocation = 2;
+}
+
 function openBook() {
+    openBtn.style.display= "none"
     book.style.transform = "translateX(50%)";
     prevBtn.style.transform = "translateX(10px)";
     nextBtn.style.transform = "translateX(10px)";
@@ -57,13 +78,11 @@ function openBook() {
 function closeBook(isAtBeginning) {
     if(isAtBeginning) {
         book.style.transform = "translateX(0%)";
-        book.style.boxShadow = "none"; // Menghilangkan shadow saat di posisi awal
+        book.style.boxShadow = "none";
     } else {
         book.style.transform = "translateX(100%)";
-        book.style.boxShadow = "none"; // Menghilangkan shadow saat di posisi akhir
-
+        book.style.boxShadow = "none";
     }
-    
     prevBtn.style.transform = "translateX(0px)";
     nextBtn.style.transform = "translateX(0px)";
 }
@@ -116,9 +135,16 @@ function goPrevPage() {
     if(currentLocation > 1) {
         switch(currentLocation) {
             case 2:
-                closeBook(true);
+                buttonContainer.classList.remove('show-buttons');
                 paper1.classList.remove("flipped");
                 paper1.style.zIndex = 8;
+                currentLocation = 1;
+                openBtn.style.display = "block"
+                closeBook(true)
+                
+                // Debugging
+                console.log("Kembali ke halaman utama");
+                console.log("Tombol Open ditampilkan kembali");
                 break;
             case 3:
                 paper2.classList.remove("flipped");
