@@ -7,7 +7,6 @@
 body {
     height: 100vh;
     display: flex;
-    flex-direction: column; /* Ubah ke column untuk tombol di bawah */
     justify-content: center;
     align-items: center;
     font-family: sans-serif;
@@ -16,8 +15,7 @@ body {
         url('background.png') center/cover;
         background-blend-mode: multiply;
 }
-    
- /* Add this new style just for the button container */
+/* Add this new style just for the button container */
         .button-container {
             display: flex;
             justify-content: center;
@@ -46,7 +44,6 @@ body {
             min-height: 100vh;
             justify-content: center;
         }
-/* Book - Tidak ada perubahan */
 .book {
     position: relative;
     width: 350px;
@@ -57,11 +54,10 @@ body {
 }
 
 .page-image {
-   width: auto;
+    width: auto;
     height: auto;
     max-width: 100%;
 }
-
 
 .paper {
     position: absolute;
@@ -73,7 +69,7 @@ body {
     transition: transform 1s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
-.front,
+.front, 
 .back {
     position: absolute;
     width: 100%;
@@ -90,7 +86,7 @@ body {
     z-index: 0;
 }
 
-.front-content,
+.front-content, 
 .back-content {
     width: 100%;
     height: 100%;
@@ -103,7 +99,6 @@ body {
     transform: rotateY(180deg);
 }
 
-/* Efek flip original - TIDAK DIUBAH */
 .flipped .front {
     transform: rotateY(-180deg);
     z-index: 10;
@@ -113,9 +108,6 @@ body {
     transform: rotateY(-180deg);
     z-index: 10;
 }
-
-
-
 
 /* Garis tepi vintage */
 .front::before {
@@ -137,6 +129,69 @@ body {
 /* Efek 3D saat hover */
 .book:hover .paper:not(.flipped) {
     transform: translateZ(10px);
+}
+
+.open-button {
+    width: 120px;
+    height: 40px;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    background-color: white;
+    border: 2px solid #FF6B8B;
+    border-radius: 25px;
+    color: #FF6B8B;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Dancing Script', cursive;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.open-button:hover {
+    background-color: #FFE6EB;
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+/* Hapus semua rule sebelumnya untuk tombol-tombol ini */
+#open-btn {
+    display: block;
+    opacity: 1;
+    transition: all 0.3s ease;
+}
+
+#prev-btn, #next-btn {
+    display: none;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+/* STATE BUKU TERBUKA */
+.show-buttons #open-btn {
+    display: none !important;
+    opacity: 0 !important;
+}
+
+.show-buttons #prev-btn,
+.show-buttons #next-btn {
+    display: flex !important;
+    opacity: 1 !important;
+}
+
+.nav-button {
+    display: none; /* Awalnya disembunyikan */
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: white;
+    border: 2px solid #FFB6C1;
+    box-shadow: 0 4px 8px rgba(255,107,139,0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
 }
 
 /* Tombol navigasi */
@@ -176,7 +231,7 @@ body {
             border-color: #FF6B8B; /* Border pink lebih gelap */
         }
 
-/* Paper stack order - Tidak diubah */
+
 #p1 { z-index: 8; }
 #p2 { z-index: 7; }
 #p3 { z-index: 6; }
